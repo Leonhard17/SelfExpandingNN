@@ -10,13 +10,12 @@ import numpy as np
 from Node import Node
 
 class Cluster:
-    def __init__(self, num_inputs: int, num_outputs, num_nodes: int = 0, nodes : list[Node] = None, nodeModel: Node = Node, init_net: bool = True): # uses basic node model, can be changed in the future
+    def __init__(self, num_inputs: int, num_outputs: int, num_nodes: int = 0, nodes : list[Node] = None, nodeModel: Node = Node, init_net: bool = True): # uses basic node model, can be changed in the future
         """
         This class saves and edits the computation tree of the nodes
         Meaning it saves the connections between the nodes
         Additionally it displays neighboring nodes needed for training
-        """
-        """
+
         This creates a cluster of nodes
         The cluster will have an input and output
         these are either connected to other clusters or inference for the user
@@ -28,8 +27,10 @@ Planned:
 - Spacial embedding used for topology
         """
 
+        # TODO : Create a depth varaible which store the longes path, used by runner for priming the network
         # TODO : Code when no nodes are given
         # TODO : Make compatible with node ids
+        # TODO : Check if error messages should be handled diffrerently
         # NOTE : Changes that either nodes are given or parameter for init
         """
         Overview
@@ -255,7 +256,6 @@ Planned:
             for j in input_connections[i]:
                 list_pos = output_connections[j].index(i)
                 node_inputs[i].append(net_inputs[j][list_pos])
-        print("node_inputs: ", node_inputs)
         # run nodes
         # here also the external input is added
         for i in range(self.num_nodes):
@@ -264,8 +264,8 @@ Planned:
             if self.nodes[i].id in self.input_nodes:
                 temp_activation = self.nodes[i].get_activation()
                 self.nodes[i].activation = temp_activation + u_inputs[self.input_nodes.index(i)]
-                print("input: ", u_inputs[self.input_nodes.index(i)])
         # get output
+        output = jnp.array([])
         for i in range(len(self.output_nodes)):
             output = jnp.append(output, self.nodes[self.output_nodes[i]].get_activation())
         return output
