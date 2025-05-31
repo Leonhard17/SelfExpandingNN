@@ -16,6 +16,18 @@ The core idea is to create a neural network that:
 
 ---
 
+## 🏗️ Repository Structure
+```
+├── DataHandler.ipynb # Notebook for loading and preparing data 
+├── DataHandler.py # Data pipeline module 
+├── Network.py # Core network architecture (nodes, layers, expansion logic) 
+├── Node.py # Node class defining individual units of computation 
+├── Network_Test.ipynb # Jupyter notebook for testing network behavior 
+└── Deprecated_Network.ipynb # Early prototype (for reference) 
+```
+
+---
+
 ## ⚙️ Current Development Status
 
 ✅ Core architecture in place:  
